@@ -9,12 +9,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // event id added to wings anindita
 const EVENT_WING_MAP = {
-  Robonix: ["EVT00008", "EVT00002", "EVT00003", "EVT00004"],
-  Eloquense: ["EVT00005", "EVT00006", "EVT00007", "EVT00008"],
-  Cybernix: ["EVT00009", "EVT00010", "EVT00011", "EVT00012"],
-  Virtuix: ["EVT00013", "EVT00014", "EVT00015", "EVT00016"],
-  Illustro: ["EVT00017", "EVT00018", "EVT00019", "EVT00020"],
-  Fun:[]
+  Robonix: [],
+  Eloquense: [],
+  Cybernix: [],
+  Virtuix: [],
+  Illustro: [],
+  Fun:["EVT00001"]
 };
 
 const WINGS = ["All", ...Object.keys(EVENT_WING_MAP)];

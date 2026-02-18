@@ -23,7 +23,7 @@ export const timelineData = [
     {
       year: "2023",
       title: "National Recognition",
-      description: "Grew to become one of Eastern India's premier technical festivals.",
+      description: "Grew to become one of Kolkata's premier technical festivals.",
       side: "right",
       // icon: "🏆"
     },

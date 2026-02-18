@@ -38,11 +38,11 @@ const Navbar = () => {
   return (
     <>
       <div
-        className="fixed inset-0 z-40 pointer-events-none"
+        className="fixed  inset-0 z-40 pointer-events-none"
       />
 
       <nav className="sticky top-0 z-50 w-full bg-transparent backdrop-blur-xl">
-        <div className="flex max-w-7xl items-center justify-between px-4 md:px-auto">
+        <div className="flex w-full items-center justify-between px-4 md:px-auto">
 
           <img src="/logo.png" alt="logo" className="h-16 md:h-22 ml-2 md:ml-7 mt-1 mr-2 md:mr-8" />
 

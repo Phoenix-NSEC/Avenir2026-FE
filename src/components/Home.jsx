@@ -130,12 +130,13 @@ const Home = () => {
                 The annual Tech Fest of NSEC (Netaji Subhash Engineering College) organized by Phoenix. Join us for 24 hours of coding, creativity, and collaboration.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 text-sm">
+              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-8 text-sm">
                 <div className="flex items-center gap-2">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-yellow-500">Month DD-DD, 2026</span>
+                  {/* Month DD-DD, 2026 */}
+                  <span className="text-yellow-500">Coming soon...</span> 
                 </div>
                 <div className="hidden sm:block border-l-2 h-9 border-white"></div>
                 <div className="flex items-center gap-2">
@@ -171,7 +172,7 @@ const Home = () => {
             </div>
             
             {/* Right Map - INSANE PARALLAX */}
-            <div className="flex items-start justify-center ml-0 lg:ml-20 pt-3 mt-8 lg:mt-0" style={{ perspective: "1800px" }}>
+            <div className="flex items-center justify-center ml-0 lg:ml-20 pt-3 mt-8 lg:mt-0" style={{ perspective: "1800px" }}>
               <motion.div 
                 className="rounded-3xl w-full max-w-md aspect-square relative"
                 style={{

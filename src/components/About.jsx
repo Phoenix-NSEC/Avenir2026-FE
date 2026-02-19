@@ -143,16 +143,15 @@ export default function About() {
           </h3>
 
           <p className="text-gray-300 text-base leading-relaxed">
-            Avenir is NSEC's flagship technical festival, bringing together the brightest minds from across the country to compete, collaborate, and celebrate the marvels of technology and innovation.
+Avenir is NSEC’s flagship techno-management festival, bringing together talented students from across the country to compete, collaborate, and innovate. It proudly stands as one of the institution’s most established and anticipated events.
           </p>
 
           <p className="text-gray-300 text-base leading-relaxed">
-            With a unique blend of technical competitions, workshops, talks, and cultural events, Avenir creates a platform for students to showcase their talents, learn from experts, and push the boundaries of what's possible.
+The fest comprises of many wings such as Public Speaking, Robotics, Designing, Coding, and E-Gaming, each hosting engaging competitions and skill-based challenges. In addition to technical events, Avenir also features exciting fun activities. The previous editions have successfully conducted events across all wings, along with flagship attractions such as Human Ludo, adding energy and enthusiasm to the celebration.
           </p>
 
           <p className="text-gray-300 text-base leading-relaxed">
-            What sets Avenir apart is our commitment to creating an immersive experience where technology meets creativity, where innovation meets imagination, and where the future is shaped by the brilliant minds of today.
-          </p>
+Avenir continues to be a platform where technology, creativity, and entertainment come together seamlessly.          </p>
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6">

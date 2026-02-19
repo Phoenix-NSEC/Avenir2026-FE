@@ -1,59 +1,11 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
-import { EVENT_DATA } from "../constants/Event_Data";
 
-const colorSchemes = [
-  {
-    accent: "border-yellow-400",
-    glow: "shadow-yellow-400/30",
-    titleColor: "text-yellow-300",
-    iconBg: "bg-slate-900",
-    iconBorder: "border-yellow-400",
-    buttonGradient: "from-yellow-500 to-yellow-600",
-    dotColor: "bg-yellow-400",
-    accentLight: "rgba(250, 204, 21, 0.6)",
-  },
-  {
-    accent: "border-orange-500",
-    glow: "shadow-orange-500/30",
-    titleColor: "text-orange-300",
-    iconBg: "bg-slate-900",
-    iconBorder: "border-orange-500",
-    buttonGradient: "from-orange-500 to-orange-600",
-    dotColor: "bg-orange-500",
-    accentLight: "rgba(249, 115, 22, 0.6)",
-  },
-  {
-    accent: "border-red-600",
-    glow: "shadow-red-600/30",
-    titleColor: "text-red-400",
-    iconBg: "bg-slate-900",
-    iconBorder: "border-red-600",
-    buttonGradient: "from-red-600 to-red-700",
-    dotColor: "bg-red-600",
-    accentLight: "rgba(220, 38, 38, 0.6)",
-  },
-  {
-    accent: "border-yellow-500",
-    glow: "shadow-yellow-500/30",
-    titleColor: "text-yellow-400",
-    iconBg: "bg-slate-900",
-    iconBorder: "border-yellow-500",
-    buttonGradient: "from-yellow-600 to-orange-700",
-    dotColor: "bg-yellow-500",
-    accentLight: "rgba(234, 179, 8, 0.6)",
-  },
-];
+
 
 // Advanced animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
-  },
-};
+
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40, scale: 0.9 },
@@ -92,19 +44,7 @@ const buttonVariants = {
   },
 };
 
-const pulseGlow = {
-  animate: {
-    rotate: 360,
-    transition: { duration: 2, repeat: Infinity, ease: "linear" },
-  },
-};
 
-const glitchAnimation = {
-  animate: {
-    x: [-20, 0, 20, 0],
-    transition: { duration: 0.5, repeat: Infinity, ease: "linear" },
-  },
-};
 
 export default function Events() {
   const [events, setEvents] = useState([]);
@@ -113,8 +53,30 @@ export default function Events() {
 
   const totalEventCount = events.length;
 
-  const scrollRef = useRef(null);
   const cardRefs = useRef([]);
+
+  // Fetch events from API
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/events/all`);
+        const result = await response.json();
+        if (result.success && result.data) {
+          setEvents(result.data);
+        } else {
+          setEvents([]);
+        }
+      } catch (error) {
+        console.error("Error fetching events:", error);
+        setEvents([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   useEffect(() => {
     if (!events.length) return;
@@ -125,7 +87,7 @@ export default function Events() {
         animateCardTransition(next);
         return next;
       });
-    }, 2000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [events]);
@@ -143,10 +105,6 @@ export default function Events() {
   const changeEvent = (index) => {
     setCurrentEventIndex(index);
     animateCardTransition(index);
-  };
-
-  const getColorScheme = (index) => {
-    return colorSchemes[index % colorSchemes.length];
   };
 
   return (
@@ -239,45 +197,159 @@ export default function Events() {
           </motion.div>
         </motion.div>
 
-        {/* Carousel Controls */}
-        {events.length > 0 && (
+        {/* Event Carousel */}
+        {loading ? (
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.5,
-              type: "spring",
-              stiffness: 100,
-              damping: 15,
-            }}
-            className="flex justify-center gap-4 mt-10 flex-wrap"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="mt-12 text-center"
           >
-            {events.map((_, index) => (
-              <motion.button
-                key={index}
-                onClick={() => changeEvent(index)}
-                whileHover={{
-                  scale: 1.4,
-                  boxShadow: "0 0 25px rgba(250, 204, 21, 0.8)",
-                }}
-                whileTap={{ scale: 0.85 }}
-                animate={
-                  index === currentEventIndex
-                    ? {
-                        backgroundColor: "#FCD34D",
-                        boxShadow: "0 0 30px rgba(250, 204, 21, 0.9)",
-                        scale: 1.2,
-                      }
-                    : {
-                        backgroundColor: "rgba(0, 0, 0, 0.6)",
-                        boxShadow: "0 0 0px transparent",
-                        scale: 1,
-                      }
-                }
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="w-4 h-4 border-2 border-yellow-400 rounded-full"
-              />
-            ))}
+            <p className="text-lg text-yellow-300">Loading events...</p>
+          </motion.div>
+        ) : events.length > 0 ? (
+          <>
+            {/* Current Event Display */}
+            <motion.div
+              key={events[currentEventIndex]?.eventId}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="mt-12 bg-gradient-to-br from-slate-950 via-slate-900 to-black border-2 border-orange-500/50 rounded-2xl overflow-hidden backdrop-blur"
+              style={{
+                boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 140, 0, 0.3)",
+              }}
+            >
+              <div className="grid md:grid-cols-2 gap-8 p-8">
+                {/* Event Image */}
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="rounded-xl overflow-hidden border-2 border-yellow-400/30"
+                >
+                  <img
+                    src={events[currentEventIndex]?.posterUrl || "https://via.placeholder.com/400x600?text=Event"}
+                    alt={events[currentEventIndex]?.name}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+
+                {/* Event Details */}
+                <div className="flex flex-col justify-between">
+                  <div>
+                    <motion.h3
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="text-4xl md:text-5xl font-black text-orange-400 mb-4 uppercase"
+                    >
+                      {events[currentEventIndex]?.name}
+                    </motion.h3>
+
+                    <motion.p
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="text-yellow-300 text-lg mb-6"
+                    >
+                      {events[currentEventIndex]?.description}
+                    </motion.p>
+
+                    {/* Event Info Grid */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                      className="grid grid-cols-2 gap-4 mb-8"
+                    >
+                      <div className="bg-slate-800/50 p-4 rounded-lg border border-yellow-400/20">
+                        <p className="text-xs text-yellow-300/80 uppercase font-semibold mb-2">
+                          Registration Fee
+                        </p>
+                        <p className="text-2xl font-black text-yellow-400">
+                          ₹{events[currentEventIndex]?.registrationFee || "N/A"}
+                        </p>
+                      </div>
+
+                      <div className="bg-slate-800/50 p-4 rounded-lg border border-orange-500/20">
+                        <p className="text-xs text-orange-300/80 uppercase font-semibold mb-2">
+                          Event Date
+                        </p>
+                        <p className="text-sm font-black text-orange-400">
+                          {events[currentEventIndex]?.date
+                            ? new Date(events[currentEventIndex].date).toLocaleDateString("en-US", {
+                                month: "short",
+                                day: "numeric",
+                              })
+                            : "TBA"}
+                        </p>
+                      </div>
+                    </motion.div>
+                  </div>
+
+                  {/* Register Button */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="flex gap-4"
+                  >
+                    <Link
+                      to="/events"
+                      className="flex-1 bg-gradient-to-r from-yellow-500 via-orange-500 to-red-600 px-6 py-3 font-black uppercase tracking-wider text-black rounded-xl border-2 border-black text-center hover:scale-105 transition-all duration-300"
+                    >
+                      Register Now
+                    </Link>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Carousel Indicators */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.5,
+                type: "spring",
+                stiffness: 100,
+                damping: 15,
+              }}
+              className="flex justify-center gap-2 mt-10 flex-wrap"
+            >
+              {events.map((_, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => changeEvent(index)}
+                  whileHover={{
+                    scale: 1.4,
+                    boxShadow: "0 0 25px rgba(250, 204, 21, 0.8)",
+                  }}
+                  whileTap={{ scale: 0.85 }}
+                  animate={
+                    index === currentEventIndex
+                      ? {
+                          backgroundColor: "#FCD34D",
+                          boxShadow: "0 0 30px rgba(250, 204, 21, 0.9)",
+                          scale: 1.2,
+                        }
+                      : {
+                          backgroundColor: "rgba(0, 0, 0, 0.6)",
+                          boxShadow: "0 0 0px transparent",
+                          scale: 1,
+                        }
+                  }
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="w-3 h-3 border-2 border-yellow-400 rounded-full"
+                />
+              ))}
+            </motion.div>
+          </>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="mt-12 text-center"
+          >
+            <p className="text-lg text-yellow-300">No events available</p>
           </motion.div>
         )}
       </div>

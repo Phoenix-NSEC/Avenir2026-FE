@@ -10,10 +10,10 @@ import { motion, AnimatePresence } from "framer-motion";
 // event id added to wings anindita
 const EVENT_WING_MAP = {
   Robonix: [],
-  Eloquense: [],
+  Eloquense: ["EVT00002"],
   Cybernix: [],
-  Virtuix: [],
-  Illustro: [],
+  Virtuix: ["EVT00003"],
+  Illustro: ["EVT00004"],
   Fun:["EVT00001"]
 };
 
@@ -573,7 +573,7 @@ export default function EventPage() {
                         {/* Promo Code - Optional */}
                         <div>
                           <label className="block text-sm font-medium text-gray-400 mb-2">
-                            PROMO CODE
+                            PROMO CODE (OPTIONAL)
                           </label>
                           <div className="relative">
                             <input

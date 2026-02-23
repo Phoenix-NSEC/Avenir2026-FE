@@ -120,7 +120,7 @@ export default function About() {
 
         
         <p className="font-bold text-gray-300 max-w-2xl mx-auto mt-6 text-base sm:text-lg px-4">
-          Discover the magic behind NSEC's premier technical festival and the team that brings it to life.
+          The campus awaits the extravaganza fueled by NSEC's premier techno-management festival, and the energetic team that makes it euphoric.
         </p>
       </motion.div>
 

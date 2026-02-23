@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import teamBg from '../assets/Hero.jpeg';
+const teamBg = "https://res.cloudinary.com/drvbkxnvu/image/upload/f_auto,q_auto,c_limit/v1771424037/Hero_uhasvh.webp";
 import { useNavigate } from 'react-router';
 import { TEAM_DATA} from '../constants/Team_data';
 import { motion } from 'framer-motion';
 
 
-const TeamCard = ({ member }) => (
+const TeamCard = ({ member, showLinkedin }) => (
   <div
     className="group relative backdrop-blur-xl p-4 rounded-2xl border flex flex-col items-center hover:scale-105 transition-all duration-300 transform hover:-translate-y-2 overflow-hidden shadow-lg"
     style={{ borderColor: 'rgba(212, 175, 55, 0.2)' }}
@@ -15,7 +15,7 @@ const TeamCard = ({ member }) => (
 
     {/* Avatar */}
     <div
-      className="w-28 h-28 rounded-full mb-5 p-1"
+      className="w-20 h-20 sm:w-28 sm:h-28 rounded-full mb-3 sm:mb-5 p-1"
       style={{ background: 'linear-gradient(to top right, #D4AF37, #FF8C42, #2B0F3F)' }}
     >
       <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-black">
@@ -26,37 +26,39 @@ const TeamCard = ({ member }) => (
             className="w-full h-full object-cover"
           />
         ) : (
-          <span className="text-3xl font-bold text-[#D4AF37]">?</span>
+          <span className="text-2xl sm:text-3xl font-bold text-[#D4AF37]">?</span>
         )}
       </div>
     </div>
 
-    <h3 className="text-xl font-black text-white tracking-wider mb-1 group-hover:text-[#D4AF37] transition-colors uppercase">
+    <h3 className="text-lg sm:text-xl font-black text-white tracking-wider mb-1 group-hover:text-[#D4AF37] transition-colors uppercase text-center">
       {member.name}
     </h3>
 
     <p
-      className="text-sm font-bold tracking-widest uppercase mb-6 transition-colors"
+      className="text-[10px] sm:text-sm font-bold tracking-widest uppercase mb-4 sm:mb-6 transition-colors text-center"
       style={{ color: '#FF8C42' }}
     >
       {member.role}
     </p>
 
-    <div className="flex gap-5 z-10 relative">
+    <div className="flex gap-3 sm:gap-5 z-10 relative">
       <a
         target='_blank'
         href={member.instagram}
-        className="text-2xl text-gray-400 hover:text-[#FF8C42] transition-transform hover:scale-110 font-semibold uppercase tracking-widest"
+        className="text-xl sm:text-2xl text-gray-400 hover:text-[#FF8C42] transition-transform hover:scale-110 font-semibold uppercase tracking-widest"
       >
         <i class="fa-brands fa-instagram"></i>
       </a>
-      <a
-        target='_blank'
-        href={member.linkedin}
-        className="text-2xl text-gray-400 hover:text-[#D4AF37] transition-transform hover:scale-110 font-semibold uppercase tracking-widest"
-      >
-        <i class="fa-brands fa-linkedin"></i>
-      </a>
+      {showLinkedin && member.linkedin && member.linkedin !== "#" && (
+        <a
+          target='_blank'
+          href={member.linkedin}
+          className="text-xl sm:text-2xl text-gray-400 hover:text-[#D4AF37] transition-transform hover:scale-110 font-semibold uppercase tracking-widest"
+        >
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      )}
     </div>
 
     <style>{`
@@ -99,7 +101,7 @@ const Team = () => {
 
     return (
         <div
-            className="min-h-screen pt-24 pb-12 px-4 bg-cover bg-center bg-no-repeat bg-fixed relative overflow-x-hidden"
+            className="min-h-screen pt-20 md:pt-24 pb-12 px-4 bg-cover bg-center bg-no-repeat bg-fixed relative overflow-x-hidden"
             style={{
                 backgroundImage: `linear-gradient(rgba(11, 11, 11, 0.7), rgba(43, 15, 63, 0.85)), url(${teamBg})`
             }}
@@ -117,14 +119,14 @@ const Team = () => {
             {/* Back to Home Button */}
             <div
                 onClick={()=>{navigate('/')}}
-                className="cursor-pointer absolute top-6 left-6 px-6 py-2 backdrop-blur-md border font-bold rounded-full transition-all duration-300 z-10 flex items-center gap-2 group hover:-skew-x-6 text-sm uppercase tracking-widest hover:text-white"
+                className="cursor-pointer absolute top-4 left-4 md:top-6 md:left-6 px-4 md:px-6 py-2 backdrop-blur-md border font-bold rounded-full transition-all duration-300 z-10 flex items-center gap-2 group hover:-skew-x-6 text-[10px] md:text-sm uppercase tracking-widest hover:text-white"
                 style={{
                     backgroundColor: 'rgba(11, 11, 11, 0.4)',
                     borderColor: '#D4AF37',
                     color: '#D4AF37'
                 }}
             >
-                <span className="group-hover:-translate-x-1 transition-transform duration-300">←</span> Back to Home
+                <span className="group-hover:-translate-x-1 transition-transform duration-300">←</span> <span className="hidden xs:inline">Back to Home</span>
             </div>
 
             <div className="container mx-auto">
@@ -134,9 +136,9 @@ const Team = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         whileHover={{ rotateY: 10 }}
                         transition={{ duration: 0.5, ease: "easeOut" }}
-                        className="hover:scale-105 cursor-pointer tracking-wider text-6xl md:text-7xl font-extrabold mb-16 text-center bg-clip-text drop-shadow-[0_4px_8px_rgba(0,0,0,0.9)] uppercase font-[Impact,sans-serif]  transition-transform duration-500 text-orange-500"
+                        className="hover:scale-105 cursor-pointer tracking-wider text-4xl sm:text-6xl md:text-7xl font-extrabold mb-10 md:mb-16 text-center bg-clip-text drop-shadow-[0_4px_8px_rgba(0,0,0,0.9)] uppercase font-[Impact,sans-serif]  transition-transform duration-500 text-orange-500"
                         style={{
-                            textShadow: `2.5px 2.5px 0px #000,4px 4px 0px rgba(250, 204, 21, 1.8)`,
+                            textShadow: `1.5px 1.5px 0px #000, 3px 3px 0px rgba(250, 204, 21, 1.8)`,
                             transformStyle: "preserve-3d",
                             perspective: 800,
                             backgroundImage: 'linear-gradient(to bottom, #D4AF37, #FF8C42)'
@@ -168,9 +170,9 @@ const Team = () => {
                 </div>
 
                 {/* Active Section Content */}
-                <div className="cursor-pointer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div className="cursor-pointer grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 max-w-6xl mx-auto px-2">
                     {TEAM_DATA[activeTab].map((member) => (
-                        <TeamCard key={member.id} member={member} />
+                        <TeamCard key={member.id} member={member} showLinkedin={activeTab === 'dev'} />
                     ))}
                 </div>
 

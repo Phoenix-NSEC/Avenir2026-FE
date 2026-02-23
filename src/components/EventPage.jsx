@@ -3,7 +3,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 // import { EVENT_DATA } from "../constants/Event_Data";
 import { useNavigate } from "react-router";
-import bg from '../assets/Hero.jpeg';
+const bg = "https://res.cloudinary.com/drvbkxnvu/image/upload/f_auto,q_auto,c_limit/v1771424037/Hero_uhasvh.webp";
 import { motion, AnimatePresence } from "framer-motion";
 // import { Fireworks } from 'fireworks-js';
 
@@ -147,8 +147,8 @@ export default function EventPage() {
     // Logos
     // Assuming relative paths work or we use base64/absolute if served.
     // In dev, relative to public works if served.
-    addImageQuietly('/logo.png', 'PNG', 10, 5, 30, 30);
-    addImageQuietly('/phoenix.jpeg', 'JPEG', pageWidth - 40, 5, 30, 30);
+    addImageQuietly('https://res.cloudinary.com/drvbkxnvu/image/upload/f_auto,q_auto,c_limit/v1771862796/avenirHS_logo_fqeplp.jpg', 'PNG', 10, 5, 30, 30);
+    addImageQuietly('https://res.cloudinary.com/drvbkxnvu/image/upload/f_auto,q_auto,c_limit/v1771424036/phoenix_r7onnu.webp', 'JPEG', pageWidth - 40, 5, 30, 30);
 
     // Title
     doc.setTextColor(255, 255, 255);
@@ -308,11 +308,11 @@ export default function EventPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="transition-all duration-500 hover:scale-102 cursor-pointer text-6xl font-black uppercase tracking-wider text-center mb-12"
+            className="transition-all duration-500 hover:scale-102 cursor-pointer text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-wider text-center mb-8 md:mb-12 px-4"
             style={{
               color: "#FF8C00",
-              textShadow: `3px 3px 0px #000, 5px 5px 0px #FFA500, 7px 7px 0px #FFD700`,
-              WebkitTextStroke: "2px rgba(0,0,0,0.8)",
+              textShadow: `2px 2px 0px #000, 4px 4px 0px #FFA500, 6px 6px 0px #FFD700`,
+              WebkitTextStroke: "1px rgba(0,0,0,0.8)",
               perspective: 800,
             }}
           >
@@ -355,11 +355,11 @@ export default function EventPage() {
                   transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                   className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full mb-4"
                 />
-                <p className="text-orange-400 font-bold animate-pulse tracking-widest uppercase">Initializing Neural Link...</p>
+                <p className="text-orange-400 font-bold animate-pulse tracking-widest uppercase">Loading...</p>
               </div>
             ) : filteredEvents.length === 0 ? (
               <div className="col-span-full text-center py-20">
-                <p className="text-gray-500 text-xl font-medium tracking-wide">No events found in this neural sector.</p>
+                <p className="text-gray-500 text-xl font-medium tracking-wide">No events found.</p>
               </div>
             ) : (
               filteredEvents.map((event, index) => {

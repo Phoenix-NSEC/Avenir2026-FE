@@ -85,7 +85,7 @@ export default function Footer() {
                   <motion.img
                     whileHover={{ scale: 1.2, y: -2 }}
                     whileTap={{ scale: 0.9 }}
-                    src="/phoenix.jpeg"
+                    src="https://res.cloudinary.com/drvbkxnvu/image/upload/f_auto,q_auto,c_limit/v1771424036/phoenix_r7onnu.webp"
                     alt="Phoenix Logo"
                     className="h-[22px] w-[25px] rounded-3xl hover:text-yellow-500 transition"
                   />

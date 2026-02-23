@@ -8,7 +8,7 @@ export default function Loader({ fading }) {
       }`}
     >
       <video
-        src="/Loader3.mp4"
+        src="https://res.cloudinary.com/drvbkxnvu/video/upload/f_auto,q_auto/v1771864260/Loader3_1_h5hldi.mp4"
         autoPlay
         muted
         playsInline

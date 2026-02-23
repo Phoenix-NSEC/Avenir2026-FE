@@ -29,8 +29,8 @@ export const timelineData = [
     },
     {
       year: "2026",
-      title: "Better than Ever",
-      description: "Avenir'26 brings a promise of excitement, high octane events, that compels willing participants to rack their brains and navigate through the streets of Avenir City. With students from over 50+ different institutions spanning across Kolkata, this is the moment to win it all.",
+      title: "A promise for the future ",
+      description: "Avenir 26 brings a promise of excitement, high octane events, that compels willing participants to rack their brains and navigate through the streets of Avenir City. With the official theme as GTA - GRAND THEFT AUTO, the world  famous gaming franchise. With students from over 50+ different institutions spanning across Kolkata and beyond, this is the moment to win it all.",
       side: "left",
       // icon: "✨"
     },

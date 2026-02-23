@@ -11,7 +11,7 @@ const Navbar = () => {
 
   const toggleAudio = () => {
     if (!audioRef.current) {
-      audioRef.current = new Audio('/home-audio_2.mp3')
+      audioRef.current = new Audio('https://res.cloudinary.com/drvbkxnvu/video/upload/f_auto,q_auto/v1771864273/home-audio_2_1_lwngfe.mp3')
       audioRef.current.loop = true
     }
 
@@ -26,6 +26,37 @@ const Navbar = () => {
   const navigate = useNavigate()
   const [active, setActive] = useState('home')
 
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-10% 0px -70% 0px', // Adjust these values to fine-tune when a section becomes "active"
+      threshold: 0
+    }
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id)
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions)
+    
+    // Sections to observe
+    const sectionIds = ['home', 'events', 'timeline', 'about', 'faq']
+    sectionIds.forEach(id => {
+      const element = document.getElementById(id)
+      if (element) observer.observe(element)
+    })
+
+    return () => {
+      sectionIds.forEach(id => {
+        const element = document.getElementById(id)
+        if (element) observer.unobserve(element)
+      })
+    }
+  }, [])
 
   const linkClass = (name) =>
     name === active ? 'text-amber-400' : 'text-white hover:text-gray-300'
@@ -44,11 +75,11 @@ const Navbar = () => {
       <nav className="sticky top-0 z-50 w-full bg-transparent backdrop-blur-xl">
         <div className="flex w-full items-center justify-between px-4 md:px-auto">
 
-          <img src="/logo.png" alt="logo" className="h-16 md:h-22 ml-2 md:ml-7 mt-1 mr-2 md:mr-8" />
+          <img src="https://res.cloudinary.com/drvbkxnvu/image/upload/f_auto,q_auto,c_limit/v1771863596/Picsart_26-02-23_09-37-42-100_gpwhxd.png" alt="logo" className="h-16 md:h-22 ml-2 md:ml-7 mt-1 mr-2 md:mr-8" />
 
           {/* Desktop Navigation */}
           <ul className="hidden lg:flex cursor-pointer items-center gap-9 text-sm font-medium">
-            <li><a href="#" onClick={() => setActive('home')} className={linkClass('home')}>Home</a></li>
+            <li><a href="#home" onClick={() => setActive('home')} className={linkClass('home')}>Home</a></li>
             <li><a href="#events" onClick={() => setActive('events')} className={linkClass('events')}>Events</a></li>
             <li><a href="#timeline" onClick={() => setActive('timeline')} className={linkClass('timeline')}>Timeline</a></li>
             <li><a href="#about" onClick={() => setActive('about')} className={linkClass('about')}>About</a></li>
@@ -133,7 +164,7 @@ const Navbar = () => {
         {mobileMenuOpen && (
           <div className="lg:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-xl border-t border-white/10">
             <ul className="flex flex-col items-center gap-4 py-6 text-sm font-medium">
-              <li><a href="#" onClick={() => handleNavClick('home')} className={linkClass('home')}>Home</a></li>
+              <li><a href="#home" onClick={() => handleNavClick('home')} className={linkClass('home')}>Home</a></li>
               <li><a href="#events" onClick={() => handleNavClick('events')} className={linkClass('events')}>Events</a></li>
               <li><a href="#timeline" onClick={() => handleNavClick('timeline')} className={linkClass('timeline')}>Timeline</a></li>
               <li><a href="#about" onClick={() => handleNavClick('about')} className={linkClass('about')}>About</a></li>

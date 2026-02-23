@@ -6,25 +6,25 @@ export default function Timeline() {
   const [activeIndex, setActiveIndex] = useState(null);
 
   return (
-    <section className="w-full py-20 px-4 text-white">
+    <section className="w-full py-16 md:py-20 px-4 text-white">
       {/* Heading - GTA Style */}
       <div className="text-center mb-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="transition-all duration-500 hover:scale-102 cursor-pointer text-6xl font-black uppercase tracking-wider"
+          className="transition-all duration-500 hover:scale-102 cursor-pointer text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-wider"
           style={{
             color: "#FF8C00",
-            textShadow: `3px 3px 0px #000, 5px 5px 0px #FFA500, 7px 7px 0px #FFD700`,
-            WebkitTextStroke: "2px rgba(0,0,0,0.8)",
+            textShadow: `2px 2px 0px #000, 4px 4px 0px #FFA500, 6px 6px 0px #FFD700`,
+            WebkitTextStroke: "1.5px rgba(0,0,0,0.8)",
             perspective: 800,
           }}
         >
           Timeline
         </motion.h2>
 
-        <div className="flex justify-center items-center gap-3 mt-4">
+        <div className="flex justify-center items-center gap-2 sm:gap-3 mt-4">
           {/* LEFT FADE LINE */}
           <motion.div
             initial={{ scaleX: 0 }}
@@ -32,7 +32,7 @@ export default function Timeline() {
             viewport={{ once: true }}
             transition={{ duration: 1.9, ease: "easeOut" }}
             style={{ transformOrigin: "100% 50%" }}
-            className="h-1 w-32 bg-linear-to-r from-transparent via-yellow-500 to-yellow-500"
+            className="h-1 w-20 sm:w-32 bg-linear-to-r from-transparent via-yellow-500 to-yellow-500"
           ></motion.div>
 
           {/* DIAMOND */}
@@ -51,7 +51,7 @@ export default function Timeline() {
             viewport={{ once: true }}
             transition={{ duration: 1.9, ease: "easeOut" }}
             style={{ transformOrigin: "0% 50%" }}
-            className="h-1 w-32 bg-gradient-to-l from-transparent via-yellow-500 to-yellow-500"
+            className="h-1 w-20 sm:w-32 bg-gradient-to-l from-transparent via-yellow-500 to-yellow-500"
           ></motion.div>
         </div>
       </div>
@@ -59,7 +59,7 @@ export default function Timeline() {
       {/* Timeline Container */}
       <div className="relative max-w-5xl mx-auto">
         {/* Vertical line - Orange/Yellow Gradient */}
-        <div className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-linear-to-b from-yellow-400 via-orange-500 to-transparent" />
+        <div className="absolute left-4 md:left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-linear-to-b from-yellow-400 via-orange-500 to-transparent" />
 
         {timelineData.map((item, index) => (
           <TimelineItem
@@ -103,8 +103,8 @@ function TimelineItem({ item, index, setActiveIndex, isActive }) {
         duration: 0.6,
         ease: "easeOut",
       }}
-      className={`relative mb-7 flex ${
-        item.side === "left" ? "justify-start" : "justify-end"
+      className={`relative mb-10 flex flex-col md:flex-row ${
+        item.side === "left" ? "md:justify-start" : "md:justify-end"
       }`}
     >
       {/* Animated Glowing Card */}
@@ -117,15 +117,15 @@ function TimelineItem({ item, index, setActiveIndex, isActive }) {
           ],
         }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        className="w-full md:w-[45%] backdrop-blur-md bg-black/60 border border-yellow-500/40 rounded-xl p-5 relative z-10"
+        className="ml-10 md:ml-0 w-[calc(100%-40px)] md:w-[45%] backdrop-blur-md bg-black/60 border border-yellow-500/40 rounded-xl p-5 relative z-10"
       >
-        <span className="text-lg text-orange-500 font-black tracking-widest">
+        <span className="text-base sm:text-lg text-orange-500 font-black tracking-widest">
           {item.year}
         </span>
-        <h3 className="text-2xl font-extrabold mt-1 text-yellow-400 uppercase tracking-tight">
+        <h3 className="text-xl sm:text-2xl font-extrabold mt-1 text-yellow-400 uppercase tracking-tight">
           {item.title}
         </h3>
-        <p className="text-gray-300 mt-3 text-sm leading-relaxed font-medium">
+        <p className="text-gray-300 mt-3 text-xs sm:text-sm leading-relaxed font-medium">
           {item.description}
         </p>
       </motion.div>
@@ -135,7 +135,7 @@ function TimelineItem({ item, index, setActiveIndex, isActive }) {
         initial={{ scale: 0 }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
-        className="absolute left-1/2 top-10 -translate-x-1/2 z-20"
+        className="absolute left-4 md:left-1/2 top-10 -translate-x-1/2 z-20"
       >
         {isActive && (
           <motion.div
@@ -145,7 +145,7 @@ function TimelineItem({ item, index, setActiveIndex, isActive }) {
           />
         )}
         <div
-          className={`relative w-5 h-5 rounded-full border-2 border-black bg-gradient-to-r from-yellow-400 to-orange-600 transition-shadow duration-300 ${
+          className={`relative w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-black bg-gradient-to-r from-yellow-400 to-orange-600 transition-shadow duration-300 ${
             isActive ? "shadow-[0_0_15px_#facc15]" : "shadow-none"
           }`}
         />

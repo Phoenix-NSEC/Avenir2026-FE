@@ -6,6 +6,7 @@ import Loader from "./components/Loader";
 import Phone_loader from "./components/Phone_loader";
 import EventPage from "./components/EventPage";
 import Cam_Rep from "./components/Cam_Rep";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -31,6 +32,7 @@ const App = () => {
   if (loading) return isSmallScreen ? <Phone_loader /> : <Loader />;
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/events" element={<EventPage />} />

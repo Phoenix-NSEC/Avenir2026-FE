@@ -17,11 +17,11 @@ const FAQ = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="ml-3 transition-all duration-500 hover:scale-105 cursor-pointer text-5xl font-black uppercase tracking-wider mb-10 "
+                className="ml-3 transition-all duration-500 hover:scale-105 cursor-pointer text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-wider mb-8 md:mb-10 text-center md:text-left"
                 style={{
                   color: "#FF8C00",
-                  textShadow: `3px 3px 0px #000, 5px 5px 0px #FFA500, 7px 7px 0px #FFD700`,
-                  WebkitTextStroke: "2px rgba(0,0,0,0.8)",
+                  textShadow: `2px 2px 0px #000, 4px 4px 0px #FFA500, 5px 5px 0px #FFD700`,
+                  WebkitTextStroke: "1px rgba(0,0,0,0.8)",
                   perspective: 800,
                 }}
               >

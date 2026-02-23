@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import Hero from '../assets/Hero.jpeg'
+const Hero = "https://res.cloudinary.com/drvbkxnvu/image/upload/f_auto,q_auto,c_limit/v1771424037/Hero_uhasvh.webp";
 import Navbar from './Navbar'
 import About from './About'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Timeline from './Timeline'
 import FAQ from './FAQ'
 import Footer from './Footer'
-import Map from '../assets/Home_map.jpeg'
+const Map = "https://res.cloudinary.com/drvbkxnvu/image/upload/f_auto,q_auto,c_limit/v1771424038/Home_map_ahek0f.webp";
 import Events from './Events'
 
 
@@ -15,7 +15,6 @@ const Home = () => {
   const { scrollY } = useScroll()
 
   // Enhanced parallax transforms for the map
-  const mapY = useTransform(scrollY, [0, 1000], [0, -250])
   const mapScale = useTransform(scrollY, [0, 600], [1, 1.2])
   const mapRotate = useTransform(scrollY, [0, 600], [0, -5])
   const mapOpacity = useTransform(scrollY, [0, 400, 800], [1, 0.95, 0.75])
@@ -48,13 +47,23 @@ const Home = () => {
   })
 
   useEffect(() => {
+    const targetDate = new Date('February 27, 2026 10:00:00').getTime()
+
     const interval = setInterval(() => {
-      setTimeLeft({
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0
-      })
+      const now = new Date().getTime()
+      const difference = targetDate - now
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60)
+        })
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+        clearInterval(interval)
+      }
     }, 1000)
 
     return () => clearInterval(interval)
@@ -71,11 +80,11 @@ const Home = () => {
         </div>
         <Navbar/>
 
-        <div className="container px-4 sm:px-6 md:px-10 pt-6 md:pt-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-15 items-start">
+        <section id="home" className="container px-4 sm:px-6 md:px-10 pt-6 md:pt-10 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-15 items-center">
             {/* Left Content */}
-            <div className="text-white ml-0 md:ml-10">
-              <div className="relative inline-block p-[1px] overflow-hidden rounded-full">
+            <div className="text-white ml-0 md:ml-10 text-center lg:text-left">
+              <div className="relative inline-block p-[1px] overflow-hidden rounded-full mb-4">
                 {/* The revolving light layer */}
                 <motion.div
                   className="absolute inset-[-1000%] opacity-70"
@@ -97,7 +106,7 @@ const Home = () => {
               </div>
               
               <h1 
-                className="text-[40px] sm:text-[60px] lg:text-[80px] font-extrabold text-yellow-500 leading-tight flex"
+                className="text-[38px] xs:text-[45px] sm:text-[60px] lg:text-[80px] font-extrabold text-yellow-500 leading-tight flex justify-center lg:justify-start flex-wrap"
                 style={{ perspective: "1000px" }}
               >
                 {"AVENIR'26".split("").map((letter, index) => (
@@ -127,8 +136,7 @@ const Home = () => {
               </h1>
               
               <p className="text-[13px] sm:text-[15px] text-gray-200 leading-relaxed mb-5">
-                The annual Tech Fest of NSEC (Netaji Subhash Engineering College) organized by Phoenix. Join us for 24 hours of coding, creativity, and collaboration.
-              </p>
+“The annual Techno-management Fest of NSEC (Netaji Subhash Engineering College) organized by Phoenix, the official Tech Club. Join us for 3 days of extravaganza,  creativity, and collaboration.             </p>
               
               <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-8 text-sm">
                 <div className="flex items-center gap-2">
@@ -149,23 +157,23 @@ const Home = () => {
               <hr className='mt-[20px]'/>
               {/* Countdown Timer */}
                 <div className="pt-5">
-                <h2 className="text-[18px] mb-3 font-semibold">TECH FEST STARTS IN</h2>
-                <div className="grid grid-cols-6 gap-2">
-                  <div className="bg-black bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-lg p-4 text-center">
-                    <div className="text-2xl font-bold text-yellow-500">00</div>
-                    <div className=" mt-2 text-gray-300 text-center">DAYS</div>
+                <h2 className="text-[18px] mb-3 font-semibold">TECH FEST HEADSTARTS IN</h2>
+                <div className="grid grid-cols-4 sm:grid-cols-4 gap-2">
+                  <div className="bg-black bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-lg p-3 sm:p-4 text-center">
+                    <div className="text-xl sm:text-2xl font-bold text-yellow-500">{String(timeLeft.days).padStart(2, '0')}</div>
+                    <div className="text-[10px] sm:text-sm mt-1 sm:mt-2 text-gray-300">DAYS</div>
                   </div>
-                  <div className="bg-black bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-lg p-4 text-center">
-                    <div className="text-2xl font-bold text-yellow-500">00</div>
-                    <div className="text-sm mt-2 text-gray-300">HOURS</div>
+                  <div className="bg-black bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-lg p-3 sm:p-4 text-center">
+                    <div className="text-xl sm:text-2xl font-bold text-yellow-500">{String(timeLeft.hours).padStart(2, '0')}</div>
+                    <div className="text-[10px] sm:text-sm mt-1 sm:mt-2 text-gray-300">HOURS</div>
                   </div>
-                  <div className="bg-black bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-lg p-4 text-center">
-                    <div className="text-2xl font-bold text-yellow-500">00</div>
-                    <div className="text-sm mt-2 text-gray-300">MIN</div>
+                  <div className="bg-black bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-lg p-3 sm:p-4 text-center">
+                    <div className="text-xl sm:text-2xl font-bold text-yellow-500">{String(timeLeft.minutes).padStart(2, '0')}</div>
+                    <div className="text-[10px] sm:text-sm mt-1 sm:mt-2 text-gray-300">MIN</div>
                   </div>
-                  <div className="bg-black bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-lg p-4 text-center">
-                    <div className="text-2xl font-bold text-yellow-500">00</div>
-                    <div className="text-sm mt-2 text-gray-300">SEC</div>
+                  <div className="bg-black bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-lg p-3 sm:p-4 text-center">
+                    <div className="text-xl sm:text-2xl font-bold text-yellow-500">{String(timeLeft.seconds).padStart(2, '0')}</div>
+                    <div className="text-[10px] sm:text-sm mt-1 sm:mt-2 text-gray-300">SEC</div>
                   </div>
                 </div>
               </div>
@@ -205,29 +213,30 @@ const Home = () => {
 
 
                   {/* Map container with overflow hidden */}
-                  <motion.div 
-                    className="relative w-full h-full overflow-hidden rounded-2xl"
+                  <motion.a 
+                    href="https://www.google.com/maps/place/Netaji+Subhash+Engineering+College/@22.4762788,88.4123703,17z/data=!3m1!4b1!4m6!3m5!1s0x3a02722b05a38e87:0x276c0d30e6be12ea!8m2!3d22.4762788!4d88.4149452!16s%2Fm%2F026y4qr?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative block w-full h-full overflow-hidden rounded-2xl cursor-pointer"
                     style={{
                       opacity: mapOpacity,
                       transformStyle: "preserve-3d",
                       transform: "translateZ(50px)",
                     }}
                   >
-                    {/* Background layer - deeper parallax */}
+                    {/* Background layer */}
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-br from-yellow-900/20 via-transparent to-yellow-900/20"
                       style={{
-                        y: mapY * 0.5,
                         scale: mapScale * 0.95,
                       }}
                     />
 
-                    {/* Main map image - primary parallax */}
+                    {/* Main map image */}
                     <motion.img
                       src={Map}
                       alt="NSEC Campus Map"
                       style={{ 
-                        y: mapY,
                         scale: mapScale,
                         rotate: mapRotate,
                         x: mousePosition.x * 10,
@@ -236,11 +245,10 @@ const Home = () => {
                       transition={{ type: "spring", stiffness: 80, damping: 20 }}
                     />
 
-                    {/* Foreground overlay - faster parallax */}
+                    {/* Foreground overlay */}
                     <motion.div
                       className="absolute inset-0"
                       style={{
-                        y: mapY * 1.5,
                         background: "radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.3) 100%)",
                       }}
                     />
@@ -272,7 +280,7 @@ const Home = () => {
 
                     {/* Border with gradient */}
                     <div className="absolute inset-0 rounded-3xl border-2 border-yellow-500/40 shadow-[0_0_30px_rgba(255,215,0,0.3)]"></div>
-                  </motion.div>
+                  </motion.a>
 
                   {/* Corner dots - static anchors */}
                   <div className="absolute top-4 sm:top-7 left-4 sm:left-7 w-2 h-2 bg-yellow-500 rounded-full shadow-[0_0_10px_rgba(255,215,0,0.8)]"></div>
@@ -312,7 +320,7 @@ const Home = () => {
               </motion.div>
             </div>
           </div>
-        </div>
+        </section>
 
 
         <section id='events' className='scroll-mt-24'>

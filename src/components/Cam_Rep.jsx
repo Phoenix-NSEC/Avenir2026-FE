@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import Hero from '../assets/Hero.jpeg';
+const Hero = "https://res.cloudinary.com/drvbkxnvu/image/upload/f_auto,q_auto,c_limit/v1771424037/Hero_uhasvh.webp";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router';
 
@@ -127,17 +127,17 @@ export default function Cam_Rep() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mb-8 text-center transition-all duration-500 hover:scale-102 cursor-pointer text-5xl font-black uppercase tracking-wider"
+            className="mb-8 text-center transition-all duration-500 hover:scale-102 cursor-pointer text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-wider px-4"
             style={{
               color: "#FF8C00",
-              textShadow: `3px 3px 0px #000, 5px 5px 0px #FFA500, 7px 7px 0px #FFD700`,
-              WebkitTextStroke: "2px rgba(0,0,0,0.8)",
+              textShadow: `2px 2px 0px #000, 4px 4px 0px #FFA500, 6px 6px 0px #FFD700`,
+              WebkitTextStroke: "1px rgba(0,0,0,0.8)",
               perspective: 800,
             }}
           >
             Know your Campus Representatives
           </motion.h2>
-          <div className="mb-20 flex justify-center items-center gap-3 mt-4">
+          <div className="mb-12 md:mb-20 flex justify-center items-center gap-2 sm:gap-3 mt-4 px-4 overflow-hidden">
             {/* LEFT FADE LINE */}
             <motion.div
               initial={{ scaleX: 0 }}
@@ -145,7 +145,7 @@ export default function Cam_Rep() {
               viewport={{ once: true }}
               transition={{ duration: 1.9, ease: "easeOut" }}
               style={{ transformOrigin: "100% 50%" }}
-              className="h-1 w-32 bg-gradient-to-r from-transparent via-yellow-500 to-yellow-500"
+              className="h-1 w-16 sm:w-32 bg-gradient-to-r from-transparent via-yellow-500 to-yellow-500 flex-shrink"
             ></motion.div>
 
             {/* DIAMOND */}
@@ -154,7 +154,7 @@ export default function Cam_Rep() {
               whileInView={{ scale: 1, rotate: 45 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.35, ease: "backOut" }}
-              className="w-3 h-3 bg-orange-500 shadow-[0_0_12px_#f97316]"
+              className="w-3 h-3 bg-orange-500 shadow-[0_0_12px_#f97316] flex-shrink-0"
             />
 
             {/* RIGHT FADE LINE */}
@@ -164,7 +164,7 @@ export default function Cam_Rep() {
               viewport={{ once: true }}
               transition={{ duration: 1.9, ease: "easeOut" }}
               style={{ transformOrigin: "0% 50%" }}
-              className="h-1 w-32 bg-gradient-to-l from-transparent via-yellow-500 to-yellow-500"
+              className="h-1 w-16 sm:w-32 bg-gradient-to-l from-transparent via-yellow-500 to-yellow-500 flex-shrink"
             ></motion.div>
           </div>
         </motion.div>

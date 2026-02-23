@@ -46,6 +46,15 @@ const buttonVariants = {
 
 
 
+const EVENT_WING_MAP = {
+  Robonix: [],
+  Eloquense: ["EVT00002"],
+  Cybernix: [],
+  Virtuix: ["EVT00003"],
+  Illustro: ["EVT00004"],
+  Fun:["EVT00001"]
+};
+
 export default function Events() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,7 +62,9 @@ export default function Events() {
 
   const totalEventCount = events.length;
 
-  const cardRefs = useRef([]);
+  const getWingForEvent = (eventId) => {
+    return Object.keys(EVENT_WING_MAP).find(wing => EVENT_WING_MAP[wing].includes(eventId)) || "General";
+  };
 
   // Fetch events from API
   useEffect(() => {
@@ -82,29 +93,14 @@ export default function Events() {
     if (!events.length) return;
 
     const interval = setInterval(() => {
-      setCurrentEventIndex((prev) => {
-        const next = (prev + 1) % events.length;
-        animateCardTransition(next);
-        return next;
-      });
+      setCurrentEventIndex((prev) => (prev + 1) % events.length);
     }, 5000);
 
     return () => clearInterval(interval);
   }, [events]);
 
-  const animateCardTransition = (index) => {
-    const card = cardRefs.current[index];
-    if (!card) return;
-
-    card.classList.add("animate-card-entrance");
-    setTimeout(() => {
-      card.classList.remove("animate-card-entrance");
-    }, 1000);
-  };
-
   const changeEvent = (index) => {
     setCurrentEventIndex(index);
-    animateCardTransition(index);
   };
 
   return (
@@ -115,11 +111,11 @@ export default function Events() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="hover:scale-105 transition-all duration-500 cursor-pointer text-[90px] font-black uppercase tracking-wider"
+            className="hover:scale-105 transition-all duration-500 cursor-pointer text-5xl sm:text-7xl lg:text-[90px] font-black uppercase tracking-wider"
             style={{
               color: "#FF8C00",
-              textShadow: `3px 3px 0px #000, 5px 5px 0px #FFA500, 7px 7px 0px #FFD700`,
-              WebkitTextStroke: "2px rgba(0,0,0,0.8)",
+              textShadow: `2px 2px 0px #000, 4px 4px 0px #FFA500, 5px 5px 0px #FFD700`,
+              WebkitTextStroke: "1.5px rgba(0,0,0,0.8)",
               transformStyle: "preserve-3d",
               perspective: 800,
             }}
@@ -135,7 +131,7 @@ export default function Events() {
               stiffness: 100,
               damping: 15,
             }}
-            className="text-base md:text-lg text-yellow-300 max-w-3xl mx-auto mt-1 font-semibold uppercase tracking-wider"
+            className="text-sm sm:text-base md:text-lg text-yellow-300 max-w-3xl mx-auto mt-1 font-semibold uppercase tracking-wider px-4"
           >
             Compete. Dominate. Celebrate Victory.
           </motion.p>
@@ -156,42 +152,42 @@ export default function Events() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="p-8 border-b-2 border-orange-500/30 grid md:grid-cols-3 gap-6 text-center"
+            className="p-6 md:p-8 border-b-2 border-orange-500/30 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center"
           >
             <motion.div
               variants={statVariants}
               whileHover="hover"
               className="p-4 rounded-xl bg-slate-800/50 border border-yellow-400/20 hover:border-yellow-400/60 transition"
             >
-              <h3 className="text-xs text-yellow-300/80 uppercase font-semibold tracking-wide">
+              <h3 className="text-[10px] sm:text-xs text-yellow-300/80 uppercase font-semibold tracking-wide">
                 Total Events
               </h3>
-              <p className="text-4xl md:text-5xl font-black text-yellow-400 mt-2">
+              <p className="text-3xl sm:text-4xl md:text-5xl font-black text-yellow-400 mt-2">
                 {totalEventCount}
               </p>
             </motion.div>
             <motion.div
               variants={statVariants}
               whileHover="hover"
-              className="p-3 rounded-xl bg-slate-800/50 border border-orange-500/20 hover:border-orange-500/60 transition"
+              className="p-4 rounded-xl bg-slate-800/50 border border-orange-500/20 hover:border-orange-500/60 transition"
             >
-              <h3 className="text-xs text-orange-300/80 uppercase font-semibold tracking-wide">
+              <h3 className="text-[10px] sm:text-xs text-orange-300/80 uppercase font-semibold tracking-wide">
                 Registration
               </h3>
-              <p className="text-4xl md:text-5xl font-black text-orange-400 mt-2">
+              <p className="text-3xl sm:text-4xl md:text-5xl font-black text-orange-400 mt-2">
                 OPEN
               </p>
             </motion.div>
             <motion.div
               variants={buttonVariants}
               whileTap="tap"
-              className="inline-block"
+              className="flex items-center justify-center pt-2 sm:pt-0"
             >
               <Link
                 to="/events"
-                className="hover:scale-110 transition-all duration-500 inline-block bg-gradient-to-r from-yellow-500 via-orange-500 to-red-600 px-4 md:px-8 py-4 font-black uppercase tracking-wider text-black rounded-xl border-2 border-black text-base md:text-lg mt-5"
+                className="w-full sm:w-auto hover:scale-110 transition-all duration-500 inline-block bg-gradient-to-r from-yellow-500 via-orange-500 to-red-600 px-6 md:px-8 py-4 font-black uppercase tracking-wider text-black rounded-xl border-2 border-black text-sm sm:text-base md:text-lg"
               >
-                Explore Events →
+                Explore More →
               </Link>
             </motion.div>
           </motion.div>
@@ -213,33 +209,41 @@ export default function Events() {
               key={events[currentEventIndex]?.eventId}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="mt-12 bg-gradient-to-br from-slate-950 via-slate-900 to-black border-2 border-orange-500/50 rounded-2xl overflow-hidden backdrop-blur"
+              transition={{ duration: 0.8 }}
+              className="mt-8 md:mt-12 bg-gradient-to-br from-slate-950 via-slate-900 to-black border-2 border-orange-500/50 rounded-2xl overflow-hidden backdrop-blur relative"
               style={{
                 boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 140, 0, 0.3)",
               }}
             >
-              <div className="grid md:grid-cols-2 gap-8 p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 p-4 md:p-8">
                 {/* Event Image */}
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="rounded-xl overflow-hidden border-2 border-yellow-400/30"
+                  className="rounded-xl overflow-hidden border-2 border-yellow-400/30 relative"
                 >
+                  <motion.span
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10 bg-gradient-to-r from-orange-500 to-yellow-500 text-black text-[10px] sm:text-xs font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-full uppercase tracking-wider shadow-lg"
+                  >
+                    {getWingForEvent(events[currentEventIndex]?.eventId)} presents
+                  </motion.span>
                   <img
-                    src={events[currentEventIndex]?.posterUrl || "https://via.placeholder.com/400x600?text=Event"}
+                    src={events[currentEventIndex]?.posterUrl || "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=600&h=900&auto=format&fit=crop"}
                     alt={events[currentEventIndex]?.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover aspect-[4/5] lg:aspect-auto max-h-[400px] lg:max-h-none"
                   />
                 </motion.div>
 
                 {/* Event Details */}
                 <div className="flex flex-col justify-between">
-                  <div>
+                  <div className="text-center lg:text-left">
                     <motion.h3
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
-                      className="text-4xl md:text-5xl font-black text-orange-400 mb-4 uppercase"
+                      className="text-3xl sm:text-4xl md:text-5xl font-black text-orange-400 mb-4 uppercase leading-tight"
                     >
                       {events[currentEventIndex]?.name}
                     </motion.h3>
@@ -248,7 +252,7 @@ export default function Events() {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 }}
-                      className="text-yellow-300 text-lg mb-6"
+                      className="text-gray-300 text-sm sm:text-base md:text-lg mb-6 leading-relaxed"
                     >
                       {events[currentEventIndex]?.description}
                     </motion.p>
@@ -258,28 +262,23 @@ export default function Events() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.3 }}
-                      className="grid grid-cols-2 gap-4 mb-8"
+                      className="grid grid-cols-2 gap-3 sm:gap-4 mb-8"
                     >
-                      <div className="bg-slate-800/50 p-4 rounded-lg border border-yellow-400/20">
-                        <p className="text-xs text-yellow-300/80 uppercase font-semibold mb-2">
-                          Registration Fee
+                      <div className="bg-slate-800/50 p-3 sm:p-4 rounded-lg border border-yellow-400/20">
+                        <p className="text-[10px] text-yellow-300/80 uppercase font-semibold mb-1 tracking-widest">
+                          Entry
                         </p>
-                        <p className="text-2xl font-black text-yellow-400">
-                          ₹{events[currentEventIndex]?.registrationFee || "N/A"}
+                        <p className="text-lg sm:text-xl md:text-2xl font-black text-yellow-400">
+                          ₹{events[currentEventIndex]?.registrationFee || "0"}
                         </p>
                       </div>
 
-                      <div className="bg-slate-800/50 p-4 rounded-lg border border-orange-500/20">
-                        <p className="text-xs text-orange-300/80 uppercase font-semibold mb-2">
-                          Event Date
+                      <div className="bg-slate-800/50 p-3 sm:p-4 rounded-lg border border-orange-500/20">
+                        <p className="text-[10px] text-orange-300/80 uppercase font-semibold mb-1 tracking-widest">
+                          Date
                         </p>
-                        <p className="text-sm font-black text-orange-400">
-                          {events[currentEventIndex]?.date
-                            ? new Date(events[currentEventIndex].date).toLocaleDateString("en-US", {
-                                month: "short",
-                                day: "numeric",
-                              })
-                            : "TBA"}
+                        <p className="text-lg sm:text-xl md:text-2xl text-orange-400 font-black">
+                          {events[currentEventIndex]?.date || "TBA"}
                         </p>
                       </div>
                     </motion.div>
@@ -294,7 +293,7 @@ export default function Events() {
                   >
                     <Link
                       to="/events"
-                      className="flex-1 bg-gradient-to-r from-yellow-500 via-orange-500 to-red-600 px-6 py-3 font-black uppercase tracking-wider text-black rounded-xl border-2 border-black text-center hover:scale-105 transition-all duration-300"
+                      className="flex-1 bg-gradient-to-r from-yellow-500 via-orange-500 to-red-600 px-6 py-4 font-black uppercase tracking-wider text-black rounded-xl border-2 border-black text-center hover:scale-105 transition-all duration-300 shadow-[0_10px_30px_rgba(255,165,0,0.3)]"
                     >
                       Register Now
                     </Link>

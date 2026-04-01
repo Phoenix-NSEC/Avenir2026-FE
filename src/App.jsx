@@ -5,6 +5,7 @@ import Team from "./components/Team";
 import Loader from "./components/Loader";
 import Phone_loader from "./components/Phone_loader";
 import EventPage from "./components/EventPage";
+import EventRegistrationPage from "./components/EventRegistrationPage";
 import Cam_Rep from "./components/Cam_Rep";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -36,6 +37,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/events" element={<EventPage />} />
+        <Route path="/events/:eventId" element={<EventRegistrationPage />} />
         <Route path="/team" element={<Team />} />
         <Route path="/campus_rep" element={<Cam_Rep />} />
       </Routes>

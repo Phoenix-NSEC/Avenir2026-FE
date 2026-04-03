@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
-const bg = "https://res.cloudinary.com/drvbkxnvu/image/upload/f_auto,q_auto,c_limit/v1771424037/Hero_uhasvh.webp"
+const bg = "https://res.cloudinary.com/drvbkxnvu/image/upload/v1775193580/ChatGPT_Image_Jan_9_2026_09_51_19_PM_jzyc55.png"
 // event id added to wings anindita
 const EVENT_WING_MAP = {
   Robonix: ["EVT00016", "EVT00014", "EVT00017", "EVT00018"],

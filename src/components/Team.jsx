@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-const teamBg = "https://res.cloudinary.com/drvbkxnvu/image/upload/f_auto,q_auto,c_limit/v1771424037/Hero_uhasvh.webp";
+const teamBg = "https://res.cloudinary.com/drvbkxnvu/image/upload/v1775193580/ChatGPT_Image_Jan_9_2026_09_51_19_PM_jzyc55.png";
 import { useNavigate } from 'react-router';
 import { TEAM_DATA} from '../constants/Team_data';
 import { motion } from 'framer-motion';

@@ -421,14 +421,14 @@ export default function EventRegistrationPage() {
                   PROMO CODE <span className="text-red-500">*</span>
                 </label>
                 <p className="text-xs text-gray-300 mb-3">
-                  Get your promo code from {" "}
+                  Get your college promo code from {" "}
                   <a
                     href="/campus_rep"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-orange-400 hover:text-orange-300 underline"
                   >
-                    Campus Ambassadors
+                    Campus Representatives
                   </a>{" "}
                   <span>Or use NSEC's code "NSESW6920"</span>
 

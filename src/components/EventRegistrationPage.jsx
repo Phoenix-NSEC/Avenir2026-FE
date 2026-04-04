@@ -421,7 +421,7 @@ export default function EventRegistrationPage() {
                   PROMO CODE <span className="text-red-500">*</span>
                 </label>
                 <p className="text-xs text-gray-300 mb-3">
-                  Get your college promo code from {" "}
+                  Get your promo code from {" "}
                   <a
                     href="/campus_rep"
                     target="_blank"

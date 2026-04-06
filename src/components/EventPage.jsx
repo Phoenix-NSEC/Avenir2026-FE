@@ -7,7 +7,7 @@ const EVENT_WING_MAP = {
   Robonix: ["EVT00016", "EVT00014", "EVT00017", "EVT00018"],
   Eloquense: ["EVT00011", "EVT00012", "EVT00015", "EVT00019"],
   Cybernix: ["EVT00010", "EVT00013"],
-  Virtuix: ["EVT00021"],
+  Virtuix: ["EVT00021", "EVT00024"],
   Illustro: ["EVT00007", "EVT00008", "EVT00009", "EVT00020"],
   Flagship: ["EVT00013", "EVT00020", "EVT00022", "EVT00023"]
 };
@@ -38,9 +38,10 @@ const PRIZE_POOL_MAP = {
   
   // VIRTUIX
   "EVT00021": "₹7,500",  "E Football": "₹7,500",
+  "EVT00024": "₹6,000",  "5 STAR WANTED HUNT": "₹6,000",
   
   // FLAGSHIP (GENERAL)
-  "EVT00022": "₹11,000", "Sansad Syndicate": "₹11,000",
+  "EVT00022": "₹9,500", "Sansad Syndicate": "₹9,500",
   "EVT00023": "1.5k+ Goodies", "Golden Heist": "1.5k+ Goodies"
 };
 

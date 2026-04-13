@@ -8,6 +8,7 @@ import FAQ from './FAQ'
 import Footer from './Footer'
 const Map = "https://res.cloudinary.com/drvbkxnvu/image/upload/f_auto,q_auto,c_limit/v1771424038/Home_map_ahek0f.webp";
 import Events from './Events'
+import Sponsors from './Sponsors'
 
 
 const Home = () => {
@@ -339,6 +340,10 @@ const Home = () => {
           <FAQ/>         
         </section>
         
+        <section id='sponsors' className="scroll-mt-24">
+          <Sponsors/>
+        </section>
+
         <section id='footer' className="scroll-mt-24">
           <Footer/>
         </section>

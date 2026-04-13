@@ -9,6 +9,8 @@ import EventRegistrationPage from "./components/EventRegistrationPage";
 import Cam_Rep from "./components/Cam_Rep";
 import ScrollToTop from "./components/ScrollToTop";
 
+import SponsorsPage from "./components/SponsorsPage";
+
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
@@ -40,6 +42,7 @@ const App = () => {
         <Route path="/events/:eventId" element={<EventRegistrationPage />} />
         <Route path="/team" element={<Team />} />
         <Route path="/campus_rep" element={<Cam_Rep />} />
+        <Route path="/sponsors" element={<SponsorsPage />} />
       </Routes>
     </>
   );

@@ -44,7 +44,7 @@ const Navbar = () => {
     const observer = new IntersectionObserver(observerCallback, observerOptions)
     
     // Sections to observe
-    const sectionIds = ['home', 'events', 'timeline', 'about', 'faq']
+    const sectionIds = ['home', 'events', 'timeline', 'about', 'sponsors', 'faq']
     sectionIds.forEach(id => {
       const element = document.getElementById(id)
       if (element) observer.observe(element)
@@ -83,6 +83,7 @@ const Navbar = () => {
             <li><a href="#events" onClick={() => setActive('events')} className={linkClass('events')}>Events</a></li>
             <li><a href="#timeline" onClick={() => setActive('timeline')} className={linkClass('timeline')}>Timeline</a></li>
             <li><a href="#about" onClick={() => setActive('about')} className={linkClass('about')}>About</a></li>
+            <li><h3 onClick={() => navigate('/sponsors')} className={`${linkClass('sponsors')} cursor-pointer`}>Sponsors</h3></li>
             <li><h3 onClick={() => navigate('/team')} className={linkClass('teams')}>Teams</h3></li>
             <li><a href="#faq" onClick={() => setActive('faq')} className={linkClass('faq')}>FAQ</a></li>
           </ul>
@@ -168,6 +169,7 @@ const Navbar = () => {
               <li><a href="#events" onClick={() => handleNavClick('events')} className={linkClass('events')}>Events</a></li>
               <li><a href="#timeline" onClick={() => handleNavClick('timeline')} className={linkClass('timeline')}>Timeline</a></li>
               <li><a href="#about" onClick={() => handleNavClick('about')} className={linkClass('about')}>About</a></li>
+              <li><h3 onClick={() => { navigate('/sponsors'); setMobileMenuOpen(false); }} className={`${linkClass('sponsors')} cursor-pointer`}>Sponsors</h3></li>
               <li><h3 onClick={() => { navigate('/team'); setMobileMenuOpen(false); }} className={`${linkClass('teams')} cursor-pointer`}>Teams</h3></li>
               <li><a href="#faq" onClick={() => handleNavClick('faq')} className={linkClass('faq')}>FAQ</a></li>
             </ul>

@@ -324,6 +324,10 @@ const Home = () => {
         </section>
 
 
+        <section id='sponsors' className="scroll-mt-24">
+          <Sponsors/>
+        </section>
+
         <section id='events' className='scroll-mt-24'>
           <Events/>
         </section>
@@ -338,10 +342,6 @@ const Home = () => {
 
         <section id='faq' className="scroll-mt-24">
           <FAQ/>         
-        </section>
-        
-        <section id='sponsors' className="scroll-mt-24">
-          <Sponsors/>
         </section>
 
         <section id='footer' className="scroll-mt-24">

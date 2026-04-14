@@ -61,7 +61,7 @@ export const SPONSORS = [
     id: 9, 
     name: "Yummy", 
     image: "/sponsors.png/Yummy.png", 
-    link: "#",
+    link: "https://www.instagram.com/yummy_crispyheyboss?igsh=NmRmZjJkcmNsNnBu",
     title: "Official Snacking Partner"
   },
   { 
@@ -70,5 +70,12 @@ export const SPONSORS = [
     image: "/sponsors.png/KODC_logo.jpeg", 
     link: "https://www.instagram.com/kolkataoxforddc?igsh=MTF6ZXVweXZtdzF1aA==",
     title: "Eloquense Outreach Partner"
+  },
+  { 
+    id: 11, 
+    name: "S.S.Enterprise", 
+    image: "/sponsors.png/S. S. Enterprise 1.png", 
+    link: "#",
+    title: "Eloquense event partner"
   },
 ];

@@ -23,25 +23,19 @@ export default function Cam_Rep() {
   };
 
   useEffect(() => {
-    const fetchAmbassadors = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/campus-ambassadors`);
-        const result = await response.json();
-        if (result.success) {
-          setAmbassadors(result.data);
-        } else {
-          setError(result.message || 'Failed to load ambassadors');
-        }
-      } catch (err) {
-        console.error('Error fetching ambassadors:', err);
-        setError('Network error. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAmbassadors();
+    // Backend API disconnected - using local data
+    try {
+      setLoading(true);
+      // Using mock local data instead of backend API
+      const mockAmbassadors = [
+        { caName: 'Sample Ambassador', collegeName: 'Sample College', promoCode: 'SAMPLE2024', phone: '+91 9800000000', email: 'sample@college.edu' }
+      ];
+      setAmbassadors(mockAmbassadors);
+    } catch (err) {
+      setError('Error loading ambassadors');
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   const filteredAmbassadors = ambassadors.filter(ca => {

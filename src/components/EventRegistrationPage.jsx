@@ -21,25 +21,22 @@ export default function EventRegistrationPage() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const fetchEvent = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/events/${eventId}`);
-        const result = await response.json();
-        if (result.success) {
-          setEvent(result.data);
-        } else {
-          alert("Event not found");
-          navigate("/events");
-        }
-      } catch (error) {
-        console.error("Error fetching event:", error);
-        alert("Error loading event");
-        navigate("/events");
-      } finally {
-        setLoading(false);
-      }
+    // Backend API disconnected - using mock event data
+    const mockEvent = {
+      eventId: eventId,
+      name: `Event ${eventId}`,
+      description: "This is a sample event. Backend API is disconnected.",
+      status: "active",
+      maxRegistrations: 100,
+      currentRegistrations: 0,
+      fields: [
+        { id: "fullName", label: "Full Name", type: "text", required: true },
+        { id: "email", label: "Email", type: "email", required: true },
+        { id: "phone", label: "Phone", type: "tel", required: true }
+      ]
     };
-    fetchEvent();
+    setEvent(mockEvent);
+    setLoading(false);
   }, [eventId, navigate]);
 
   const handleInputChange = (fieldId, value) => {
@@ -65,21 +62,24 @@ export default function EventRegistrationPage() {
   };
 
   const validatePromoCode = async (code) => {
+    // Backend API disconnected - promo code validation disabled
+    // Accept any promo code of length 3 or more
     if (!code || code.length < 3) {
       setPromoStatus(null);
       return;
     }
     setPromoStatus('loading');
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/campus-ambassadors/validate/${code}`);
-      const result = await response.json();
-      if (result.valid) {
-        setPromoStatus('valid');
-        setPromoDetails(result.data);
-      } else {
-        setPromoStatus('invalid');
-        setPromoDetails(null);
-      }
+      // Simulate validation with local logic
+      setTimeout(() => {
+        if (code.length >= 3) {
+          setPromoStatus('valid');
+          setPromoDetails({ valid: true, message: 'Promo code accepted (local validation)' });
+        } else {
+          setPromoStatus('invalid');
+          setPromoDetails(null);
+        }
+      }, 300);
     } catch (error) {
       console.error("Promo validation error", error);
       setPromoStatus('invalid');
@@ -191,30 +191,26 @@ export default function EventRegistrationPage() {
     }
 
     setIsSubmitting(true);
-    const data = new FormData();
-    data.append('promoCode', promoCode.trim());
-    Object.keys(formData).forEach(key => {
-      data.append(key, formData[key]);
-    });
-
+    
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/submissions/${event.eventId}`, {
-        method: 'POST',
-        body: data
-      });
-
-      const result = await response.json();
-      if (response.ok && result.success) {
-        setLastSubmissionData(result);
-        setShowSuccess(true);
-        // Automatically download receipt
-        generateReceipt(result);
-      } else {
-        alert(`Registration Failed: ${result.error || "Unknown error"}`);
-      }
+      // Backend API disconnected - simulating local submission
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+      
+      const submissionId = `REG-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+      const result = {
+        success: true,
+        submissionId: submissionId,
+        collegeName: formData.college || 'Your College',
+        promoCode: promoCode.trim()
+      };
+      
+      setLastSubmissionData(result);
+      setShowSuccess(true);
+      // Automatically download receipt
+      generateReceipt(result);
     } catch (error) {
       console.error("Submission error:", error);
-      alert("Network error. Please try again.");
+      alert("Error processing registration.");
     } finally {
       setIsSubmitting(false);
     }

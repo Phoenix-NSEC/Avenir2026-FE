@@ -99,28 +99,11 @@ export default function Events() {
     return Object.keys(EVENT_WING_MAP).find(wing => wing !== "Flagship" && EVENT_WING_MAP[wing].includes(eventId)) || "General";
   };
 
-  // Fetch events from API
+  // Backend API disconnected - using empty local state
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/events/all`);
-        const result = await response.json();
-        if (result.success && result.data) {
-          // Only show active events on home events section
-          setEvents(result.data.filter(event => event.status === "active"));
-        } else {
-          setEvents([]);
-        }
-      } catch (error) {
-        console.error("Error fetching events:", error);
-        setEvents([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEvents();
+    // To use local event data, import and set from your constants
+    setEvents([]);
+    setLoading(false);
   }, []);
 
   useEffect(() => {

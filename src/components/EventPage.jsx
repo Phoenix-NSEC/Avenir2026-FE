@@ -55,20 +55,10 @@ export default function EventPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/events/all`);
-        const result = await response.json();
-        if (result.success) {
-          setApiEvents(result.data);
-        }
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchEvents();
+    // Backend API disconnected - using empty local state
+    // To use local event data, import and set from your constants
+    setApiEvents([]);
+    setLoading(false);
   }, []);
 
   const toggleDescription = (eventId) => {
